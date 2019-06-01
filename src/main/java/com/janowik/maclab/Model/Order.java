@@ -1,4 +1,4 @@
-package Model;
+package com.janowik.maclab.Model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,11 +14,14 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 @Builder
-public class ServiceOrder {
+public class Order {
 
     @Id
     @Column(name = "id")
     private long id;
+
+    @Column(name = "date_of_report")
+    private LocalDate dateOfReport;
 
     @Column(name = "date_of_notification")
     private LocalDate dateOfNotification;
@@ -35,7 +38,19 @@ public class ServiceOrder {
     @Column(name = "repair_description")
     private String repairDescription;
 
-    @ManyToOne
-    @JoinColumn
-    private Customer customer;
+    @Column(name = "comments")
+    private String comments;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String lastname;
+
+    @Column(name = "number")
+    private String number;
+
+    @Column(name = "email")
+    private String email;
+
 }
