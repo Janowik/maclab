@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -21,9 +22,11 @@ public class Order {
     private long id;
 
     @Column(name = "date_of_report")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfReport;
 
     @Column(name = "date_of_notification")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfNotification;
 
     @Column(name = "device_description")
@@ -44,11 +47,11 @@ public class Order {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "surname")
-    private String lastname;
+    @Column(name = "last_name")
+    private String lastName;
 
-    @Column(name = "number")
-    private String number;
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
     @Column(name = "email")
     private String email;

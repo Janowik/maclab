@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
     Order findOrderByEmail(String emil);
-    Order findOrderByNumber(String number);
+    Order findOrderByPhoneNumber(String number);
     Order findOrderById(Long id);
 }

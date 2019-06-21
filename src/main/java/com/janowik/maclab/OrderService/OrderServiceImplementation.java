@@ -1,7 +1,17 @@
 package com.janowik.maclab.OrderService;
 
 import com.janowik.maclab.Model.Order;
+import org.apache.tomcat.jni.Local;
+import org.aspectj.weaver.ast.Or;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+@Service()
 public class OrderServiceImplementation implements OrderService {
 
     private final OrderRepository orderRepository;
@@ -12,22 +22,37 @@ public class OrderServiceImplementation implements OrderService {
 
     @Override
     public void saveOrder(Order order) {
-        orderRepository.save(order);
+        Order sOrder = Order.builder()
+                .dateOfReport(order.getDateOfReport())
+                .dateOfNotification(order.getDateOfNotification())
+                .deviceDescription(order.getDeviceDescription())
+                .serialImeiNumber(order.getSerialImeiNumber())
+                .problemDescription(order.getProblemDescription())
+                .repairDescription(order.getRepairDescription())
+                .comments(order.getComments())
+                .name(order.getName())
+                .lastName(order.getLastName())
+                .phoneNumber(order.getPhoneNumber())
+                .email(order.getEmail())
+                .build();
+        orderRepository.save(sOrder);
     }
 
     @Override
     public void updateOrder(long id, Order order) {
         Order updateOrder = Order.builder()
                 .id(id)
+                .dateOfReport(order.getDateOfReport())
                 .dateOfNotification(order.getDateOfNotification())
                 .deviceDescription(order.getDeviceDescription())
+                .serialImeiNumber(order.getSerialImeiNumber())
                 .problemDescription(order.getProblemDescription())
                 .repairDescription(order.getRepairDescription())
-                .email(order.getEmail())
-                .serialImeiNumber(order.getSerialImeiNumber())
+                .comments(order.getComments())
                 .name(order.getName())
-                .lastname(order.getLastname())
-                .number(order.getNumber())
+                .lastName(order.getLastName())
+                .phoneNumber(order.getPhoneNumber())
+                .email(order.getEmail())
                 .build();
         orderRepository.save(updateOrder);
     }
@@ -39,7 +64,7 @@ public class OrderServiceImplementation implements OrderService {
 
     @Override
     public Order findOrderByNumber(String number) {
-        return orderRepository.findOrderByNumber(number);
+        return orderRepository.findOrderByPhoneNumber(number);
     }
 
     @Override
