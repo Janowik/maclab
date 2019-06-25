@@ -1,17 +1,9 @@
 package com.janowik.maclab.OrderService;
 
 import com.janowik.maclab.Model.Order;
-import org.apache.tomcat.jni.Local;
-import org.aspectj.weaver.ast.Or;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-@Service()
+@Service
 public class OrderServiceImplementation implements OrderService {
 
     private final OrderRepository orderRepository;
@@ -22,7 +14,7 @@ public class OrderServiceImplementation implements OrderService {
 
     @Override
     public void saveOrder(Order order) {
-        Order sOrder = Order.builder()
+        Order newOrder = Order.builder()
                 .dateOfReport(order.getDateOfReport())
                 .dateOfNotification(order.getDateOfNotification())
                 .deviceDescription(order.getDeviceDescription())
@@ -35,7 +27,7 @@ public class OrderServiceImplementation implements OrderService {
                 .phoneNumber(order.getPhoneNumber())
                 .email(order.getEmail())
                 .build();
-        orderRepository.save(sOrder);
+        orderRepository.save(newOrder);
     }
 
     @Override
