@@ -22,10 +22,10 @@ public class OrderServiceImplementation implements OrderService {
                 .problemDescription(order.getProblemDescription())
                 .repairDescription(order.getRepairDescription())
                 .comments(order.getComments())
-                .name(order.getName())
+/*                .name(order.getName())
                 .lastName(order.getLastName())
                 .phoneNumber(order.getPhoneNumber())
-                .email(order.getEmail())
+                .email(order.getEmail())*/
                 .build();
         orderRepository.save(newOrder);
     }
@@ -41,22 +41,22 @@ public class OrderServiceImplementation implements OrderService {
                 .problemDescription(order.getProblemDescription())
                 .repairDescription(order.getRepairDescription())
                 .comments(order.getComments())
-                .name(order.getName())
+/*                .name(order.getName())
                 .lastName(order.getLastName())
                 .phoneNumber(order.getPhoneNumber())
-                .email(order.getEmail())
+                .email(order.getEmail())*/
                 .build();
         orderRepository.save(updateOrder);
     }
 
     @Override
     public Order findOrderByEmail(String emil) {
-        return orderRepository.findOrderByEmail(emil);
+        return null;
     }
 
     @Override
     public Order findOrderByNumber(String number) {
-        return orderRepository.findOrderByPhoneNumber(number);
+        return null;
     }
 
     @Override

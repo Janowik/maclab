@@ -38,4 +38,14 @@ public class OrderController {
     private List<Order> findAll(){
         return orderRepository.findAll();
     }
+
+/*    @GetMapping("/email/{email}")
+    private ResponseEntity getUserByEmail(@PathVariable("email") String email) throws NotFoundException {
+        List orderEmail = orderRepository.findOrderByEmail(email);
+        if (orderEmail.isEmpty()){
+            return new ResponseEntity<>(orderEmail, HttpStatus.OK);
+        }else {
+            throw new NotFoundException("Not found order by email: " + email);
+        }
+    }*/
 }
