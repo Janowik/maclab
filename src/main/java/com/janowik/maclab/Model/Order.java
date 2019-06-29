@@ -53,6 +53,7 @@ public class Order {
     @Column(name = "comments")
     private String comments;
 
+    @NotNull
     @JsonIgnore
     @ManyToOne
     private Person person;

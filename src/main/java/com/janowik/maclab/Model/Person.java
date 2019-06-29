@@ -1,6 +1,5 @@
 package com.janowik.maclab.Model;
 
-import com.sun.javafx.beans.IDProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +8,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "person")
@@ -17,7 +15,8 @@ import java.util.Set;
 @AllArgsConstructor
 @Data
 @Builder
-public class Person {
+public
+class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

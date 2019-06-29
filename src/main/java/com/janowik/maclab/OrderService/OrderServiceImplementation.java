@@ -1,6 +1,7 @@
 package com.janowik.maclab.OrderService;
 
 import com.janowik.maclab.Model.Order;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -8,13 +9,14 @@ public class OrderServiceImplementation implements OrderService {
 
     private final OrderRepository orderRepository;
 
+    @Autowired
     public OrderServiceImplementation(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
 
     @Override
     public void saveOrder(Order order) {
-        Order newOrder = Order.builder()
+        Order createOrder = Order.builder()
                 .dateOfReport(order.getDateOfReport())
                 .dateOfNotification(order.getDateOfNotification())
                 .deviceDescription(order.getDeviceDescription())
@@ -22,12 +24,13 @@ public class OrderServiceImplementation implements OrderService {
                 .problemDescription(order.getProblemDescription())
                 .repairDescription(order.getRepairDescription())
                 .comments(order.getComments())
+                .person(order.getPerson())
 /*                .name(order.getName())
                 .lastName(order.getLastName())
                 .phoneNumber(order.getPhoneNumber())
                 .email(order.getEmail())*/
                 .build();
-        orderRepository.save(newOrder);
+        orderRepository.save(createOrder);
     }
 
     @Override
@@ -41,6 +44,7 @@ public class OrderServiceImplementation implements OrderService {
                 .problemDescription(order.getProblemDescription())
                 .repairDescription(order.getRepairDescription())
                 .comments(order.getComments())
+                .person(order.getPerson())
 /*                .name(order.getName())
                 .lastName(order.getLastName())
                 .phoneNumber(order.getPhoneNumber())
