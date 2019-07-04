@@ -40,5 +40,5 @@ class Person {
     private String email;
 
     @OneToMany(mappedBy = "person")
-    List<Order> orderSet;
+    List<Order> orders;
 }

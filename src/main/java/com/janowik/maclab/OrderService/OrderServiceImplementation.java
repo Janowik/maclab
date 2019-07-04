@@ -25,10 +25,6 @@ public class OrderServiceImplementation implements OrderService {
                 .repairDescription(order.getRepairDescription())
                 .comments(order.getComments())
                 .person(order.getPerson())
-/*                .name(order.getName())
-                .lastName(order.getLastName())
-                .phoneNumber(order.getPhoneNumber())
-                .email(order.getEmail())*/
                 .build();
         orderRepository.save(createOrder);
     }
@@ -45,10 +41,6 @@ public class OrderServiceImplementation implements OrderService {
                 .repairDescription(order.getRepairDescription())
                 .comments(order.getComments())
                 .person(order.getPerson())
-/*                .name(order.getName())
-                .lastName(order.getLastName())
-                .phoneNumber(order.getPhoneNumber())
-                .email(order.getEmail())*/
                 .build();
         orderRepository.save(updateOrder);
     }

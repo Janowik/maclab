@@ -25,7 +25,24 @@ public class PersonServiceImplementation implements PersonService {
     }
 
     @Override
-    public void deletePerson(Person person) {
-        personRepository.deleteById(person.getId());
+    public void updatePerson(Long id, Person person) {
+        Person updateOldPerson = Person.builder()
+                .id(id)
+                .name(person.getName())
+                .lastName(person.getLastName())
+                .phoneNumber(person.getPhoneNumber())
+                .email(person.getEmail())
+                .build();
+        personRepository.save(updateOldPerson);
+    }
+
+    @Override
+    public Person findPersonByEmail(String email) {
+        return personRepository.findPersonByEmail(email);
+    }
+
+    @Override
+    public Person findPersonByPhoneNumber(String phoneNumber) {
+        return personRepository.findPersonByPhoneNumber(phoneNumber);
     }
 }

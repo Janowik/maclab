@@ -6,5 +6,7 @@ import org.springframework.stereotype.Service;
 @Service("personService")
 public interface PersonService {
     void savePerson(Person person);
-    void deletePerson(Person person);
+    void updatePerson(Long id, Person person);
+    Person findPersonByEmail(String email);
+    Person findPersonByPhoneNumber(String phoneNumber);
 }
