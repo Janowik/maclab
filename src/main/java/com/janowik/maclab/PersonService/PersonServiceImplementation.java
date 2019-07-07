@@ -3,6 +3,8 @@ package com.janowik.maclab.PersonService;
 import com.janowik.maclab.Model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 public class PersonServiceImplementation implements PersonService {
 
     private final
@@ -44,5 +46,10 @@ public class PersonServiceImplementation implements PersonService {
     @Override
     public Person findPersonByPhoneNumber(String phoneNumber) {
         return personRepository.findPersonByPhoneNumber(phoneNumber);
+    }
+
+    @Override
+    public List<Person> findAll() {
+        return personRepository.findAll();
     }
 }

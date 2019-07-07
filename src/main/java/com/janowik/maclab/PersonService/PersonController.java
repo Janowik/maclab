@@ -1,9 +1,12 @@
 package com.janowik.maclab.PersonService;
 
 import com.janowik.maclab.Model.Person;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,17 +27,22 @@ public class PersonController {
         this.personService = personService;
     }
 
-    private ResponseEntity getAllPerson(){
-        List<Person> listPerson = personS
+    @GetMapping
+    private ResponseEntity<List<Person>> getAllPerson() throws NotFoundException {
+        List<Person> listPerson = personService.findAll();
+        if (listPerson.isEmpty()){
+            throw new NotFoundException("Not found any Person");
+        }else {
+            return ResponseEntity(listPerson, HttpStatus.OK);
+        }
     }
     @PostMapping
     private ResponseEntity savePerson(@Valid Person person){
-        Optional<Person> personExist = Optional.ofNullable(personService.findPersonByPhoneNumber(person.getPhoneNumber()));
+        Optional<Person> personExist = Optional.ofNullable(personService.findPersonByEmail(person.getEmail()));
         if (personExist.isPresent()){
             throw new EntityExistsException("Person already exist.");
         }else {
-            return ResponseEntity.badRequest().
-            personService.savePerson(person);
+            return ResponseEntity.ok().body(personService.savePerson(person));
         }
         return new ResponseEntity(HttpStatus.CREATED);
     }
