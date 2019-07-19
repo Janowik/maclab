@@ -2,9 +2,11 @@ package com.janowik.maclab.PersonService;
 
 import com.janowik.maclab.Model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PersonServiceImplementation implements PersonService {
 
     private final
@@ -51,5 +53,10 @@ public class PersonServiceImplementation implements PersonService {
     @Override
     public List<Person> findAll() {
         return personRepository.findAll();
+    }
+
+    @Override
+    public Person findPersonById(Long id) {
+        return personRepository.findPersonById(id);
     }
 }

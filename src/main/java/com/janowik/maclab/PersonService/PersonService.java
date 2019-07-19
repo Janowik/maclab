@@ -12,4 +12,5 @@ public interface PersonService {
     Person findPersonByEmail(String email);
     Person findPersonByPhoneNumber(String phoneNumber);
     List<Person> findAll();
+    Person findPersonById(Long id);
 }

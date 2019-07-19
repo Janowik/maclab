@@ -8,6 +8,7 @@ import java.util.List;
 
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long> {
+    Person findPersonById(Long id);
     Person findPersonByEmail(String email);
     Person findPersonByPhoneNumber(String phoneNumber);
     List<Person> findAll();

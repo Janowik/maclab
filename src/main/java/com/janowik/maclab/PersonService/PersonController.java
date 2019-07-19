@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import sun.dc.path.PathError;
 
 import javax.persistence.EntityExistsException;
 import javax.validation.Valid;
@@ -28,22 +26,46 @@ public class PersonController {
     }
 
     @GetMapping
-    private ResponseEntity<List<Person>> getAllPerson() throws NotFoundException {
+    private ResponseEntity<Person> getAllPerson() throws NotFoundException {
         List<Person> listPerson = personService.findAll();
         if (listPerson.isEmpty()){
             throw new NotFoundException("Not found any Person");
         }else {
-            return ResponseEntity(listPerson, HttpStatus.OK);
+            return new ResponseEntity(listPerson, HttpStatus.OK);
         }
     }
+/*
     @PostMapping
     private ResponseEntity savePerson(@Valid Person person){
         Optional<Person> personExist = Optional.ofNullable(personService.findPersonByEmail(person.getEmail()));
+        personExist.orElseTh row().
         if (personExist.isPresent()){
             throw new EntityExistsException("Person already exist.");
         }else {
-            return ResponseEntity.ok().body(personService.savePerson(person));
+            return Optional.ofNullable(personService.findPersonByEmail(person.getEmail()))
+                    .map(ResponseEntity::new)
+                    .map()
+                    .orElse()
         }
         return new ResponseEntity(HttpStatus.CREATED);
+    }
+*/
+
+    @PutMapping("/{id}")
+    private ResponseEntity updatePerson(@PathVariable("{id}") Long id, @Valid Person person) throws NotFoundException {
+        Optional<Person> personWithUpdateId = Optional.ofNullable(personService.findPersonById(id));
+        if (!personWithUpdateId.isPresent()) {
+            throw new NotFoundException("Not found person with id: " + id);
+        }else {
+            Person updatePerson = Person.builder()
+                    .id(id)
+                    .name(person.getName())
+                    .lastName(person.getLastName())
+                    .phoneNumber(person.getPhoneNumber())
+                    .email(person.getEmail())
+                    .build();
+            personService.savePerson(updatePerson);
+        }
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
